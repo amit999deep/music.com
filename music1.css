@@ -1,53 +1,522 @@
+/* Reset & Basic Styles */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background: #ffffff;
-  color: rgb(255, 0, 0);
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+  /* Prevent body scroll, handle in main-content */
+  height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  height: calc(100vh - 90px);
+  /* Subtract player bar height */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: #000;
   padding: 20px;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.sidebar .logo i {
+  font-size: 40px;
+  margin-right: 5px;
+}
+
+.nav-menu ul {
+  list-style: none;
+}
+
+.nav-menu li {
+  padding: 10px 0;
+  color: #b3b3b3;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu li:hover,
+.nav-menu li.active {
+  color: #fff;
+}
+
+.nav-menu li i {
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.policies {
+  margin-top: auto;
+  font-size: 12px;
+}
+
+.policies a {
+  text-decoration: none;
+  color: #b3b3b3;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  background: linear-gradient(to bottom, #202020, #121212 20%);
+  overflow-y: auto;
+  padding: 20px;
+  position: relative;
+  border-radius: 8px;
+  /* Slight rounded corners if wanted */
+  margin: 8px 8px 0 0;
+  /* Gap for desktop app look */
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  padding-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-buttons button {
+  background: #000000;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.user-menu .sign-up {
+  background: transparent;
+  color: #b3b3b3;
+  border: none;
+  font-weight: bold;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.user-menu .sign-up:hover {
+  color: #fff;
+}
+
+.user-menu .login {
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.user-menu .login:hover {
+  transform: scale(1.05);
+}
+
+.content-spacing h2 {
+  margin-bottom: 20px;
+}
+
+/* Cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
+}
+
 .card {
-  background: #1e1e1e;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #181818;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgb(81, 255, 0);
+  background-color: #282828;
 }
 
-.card img {
+.album-art {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Gradients for placeholders - No longer needed as we have images */
+/* Removed art-1 to art-4 classes */
+
+/* Play Button on Card (appears on hover) */
+.play-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: #1E90FF;
+  /* Changed to Dodger Blue */
+  color: #fff;
+  /* Icon color white looks better on blue */
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  font-size: 20px;
+  /* Adjust icon size */
+  padding-left: 4px;
+  /* Center the play triangle visually */
+}
+
+.card:hover .play-btn {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card h3 {
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card p {
+  font-size: 14px;
+  color: #b3b3b3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bottom Player Bar */
+.player-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 90px;
+  background-color: #181818;
+  border-top: 1px solid #282828;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 100;
+}
+
+.player-left {
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+
+.current-art {
+  width: 56px;
+  height: 56px;
+  background-color: #333;
+  /* Default gray */
+  margin-right: 14px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+}
+
+.current-info h4 {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.current-info p {
+  font-size: 11px;
+  color: #b3b3b3;
+}
+
+.like-icon {
+  margin-left: 20px;
+  color: #b3b3b3;
+  cursor: pointer;
+}
+
+.like-icon:hover {
+  color: #fff;
+}
+
+.player-center {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 8px;
+}
+
+.player-controls i {
+  color: #b3b3b3;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.player-controls i:hover {
+  color: #fff;
+}
+
+.play-pause-btn {
+  color: #fff !important;
+  font-size: 32px !important;
+}
+
+.play-pause-btn i {
+  color: #fff;
+  font-size: 32px;
+}
+
+.play-pause-btn:hover {
+  transform: scale(1.1);
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  font-size: 11px;
+  color: #b3b3b3;
+}
+
+/* Range Input Styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #535353;
+  height: 4px;
+  border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  background-color: #fff;
+  /* Thumb hidden by default usually, visible on hover. Keeping simple */
+  border-radius: 50%;
+  margin-top: -4px;
+  display: none;
+  /* Hide thumb initially */
+}
+
+.progress-container:hover input[type="range"]::-webkit-slider-thumb {
+  display: block;
+}
+
+.progress-container:hover input[type="range"]::-webkit-slider-runnable-track {
+  background: #1E90FF;
+  /* Changed to Dodger Blue */
+}
+
+.player-right {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+.player-right i {
+  color: #b3b3b3;
   font-size: 16px;
 }
 
-audio {
+.volume-container {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  gap: 10px;
+}
+
+/* Mobile Navigation Styles */
+.mobile-nav {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.95);
+  position: fixed;
+  bottom: 0;
   width: 100%;
+  height: 65px;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 200;
+  border-top: 1px solid #282828;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: #b3b3b3;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.mobile-nav-item i {
+  font-size: 20px;
+}
+
+.mobile-nav-item.active {
+  color: #fff;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .app-container {
+    height: calc(100vh - 155px);
+    /* Adjusted for player bar and mobile nav */
+  }
+
+  .main-content {
+    margin: 0;
+    padding: 15px;
+  }
+
+  header {
+    padding-bottom: 15px;
+  }
+
+  .nav-buttons {
+    display: none;
+    /* Hide desktop nav buttons on mobile */
+  }
+
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns on mobile */
+    gap: 12px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .card h3 {
+    font-size: 14px;
+  }
+
+  .card p {
+    font-size: 12px;
+  }
+
+  /* Player Bar adjustments */
+  .player-bar {
+    height: auto;
+    min-height: 70px;
+    bottom: 65px;
+    /* Above mobile nav */
+    padding: 8px 12px;
+    background-color: #121212;
+  }
+
+  .player-left {
+    width: 60%;
+  }
+
+  .current-art {
+    width: 48px;
+    height: 48px;
+  }
+
+  .current-info h4 {
+    font-size: 13px;
+  }
+
+  .player-right {
+    display: none;
+    /* Hide volume/extra controls on mobile */
+  }
+
+  .player-center {
+    width: 40%;
+  }
+
+  .progress-container {
+    display: none;
+    /* Hide progress bar on mobile mini-player for premium look */
+  }
+
+  .player-controls {
+    margin-bottom: 0;
+    gap: 15px;
+  }
+
+  .player-controls i:not(.fa-step-backward):not(.fa-step-forward) {
+    display: none;
+    /* Hide shuffle/repeat on mobile */
+  }
+
+  .play-pause-btn i {
+    font-size: 28px;
+  }
+
+  .mobile-nav {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
